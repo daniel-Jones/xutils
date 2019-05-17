@@ -1,0 +1,12 @@
+A collection of simple X11 utilities written in C that I have made for myself.
+
+Each program is licenced under the GPL 3.
+
+Original repositories:
+binstatus: https://git.danieljon.es/binstatus/ https://github.com/daniel-Jones/binstatus
+xwake: https://git.danieljon.es/xwake/ https://github.com/daniel-Jones/xwake
+xbell: https://git.danieljon.es/xbell/ https://github.com/daniel-Jones/xbell
+
+binstatus: Small program that sets the root windows name to the current time in binary, used as dwm's status bar
+xwake: Simple program to prevent the X11 screensaver from starting between two times 
+xbell: Listens for X bell events and runs a user defined program when one is caught

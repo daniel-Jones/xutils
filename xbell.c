@@ -47,7 +47,11 @@ forkexecute()
 	pid_t pid = fork();
 	if (pid == 0)
 	{
-		// child process, we don't want to ignore signals
+		char *args[ARG_LIMIT];
+		char *buff = malloc(BUFF_SIZE);
+		char *t;
+		int z;
+		/*  child process, we don't want to ignore signals */
 		signal(SIGCHLD, SIG_DFL);
 		/*
 		 * we don't want std{out,err} to be associated with the terminal,
@@ -56,8 +60,6 @@ forkexecute()
 		 */
 		freopen("/dev/null", "w", stdout);
 		freopen("/dev/null", "w", stderr);
-		char *args[ARG_LIMIT];
-		char *buff = malloc(BUFF_SIZE);
 		if (buff == NULL)
 		{
 			perror("malloc");
@@ -69,9 +71,9 @@ forkexecute()
 		 * that we will use in execvp
 		 */
 		strncpy(buff, program, BUFF_SIZE-1);
-		char *t = strtok(buff, " ");
-		int z = 0;
-		while (t != NULL && z < ARG_LIMIT-1) // save a position for NULL
+		t = strtok(buff, " ");
+		z = 0;
+		while (t != NULL && z < ARG_LIMIT-1) /* save a position for NULL */
 		{
 			args[z] = t;
 			t = strtok(NULL, " ");
@@ -103,9 +105,9 @@ bellevent(void)
 int
 main(void)
 {
-	// ignore child processes
+	/* ignore child processes */
 	signal(SIGCHLD, SIG_IGN);
-	// ignore return values for now
+	/* ignore return values for now */
 	display = XkbOpenDisplay(NULL, &xkbeventcode, NULL, NULL, NULL, NULL);
 	if (!display)
 	{
